@@ -6,8 +6,22 @@ import { Offer } from '../../models/offer.model';
 })
 export class OfferRepositoryService {
   private offers: Offer[] = [
-    { offerName: 'Large Pizza Offer', size: 'Large', discount: 2 },
-    { offerName: 'Extra Large Pizza Offer', size: 'Extra Large', discount: 3 },
+    {
+      offerName: 'Offer1 - 1 Medium Pizza with 2 toppings',
+      size: 'Medium',
+      discount: 5,
+    },
+    {
+      offerName: 'Offer2 - 2 Medium Pizzas with 4 toppings each',
+      size: 'Medium',
+      discount: 9,
+    },
+    {
+      offerName:
+        'Offer3 - 1 Large with 4 toppings (Pepperoni and Barbecue chicken are counted as 2 toppings)',
+      size: 'Large',
+      discount: 50,
+    },
   ];
 
   getOffers(): Offer[] {
