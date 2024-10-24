@@ -1,0 +1,74 @@
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th rowspan="2">Toppings</th>
+        <th colspan="4">Pizza Size</th>
+      </tr>
+      <tr>
+        <th *ngFor="let size of sizes">
+          {{ size.label }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="5"><strong>Veg Toppings</strong></td>
+      </tr>
+      <tr *ngFor="let topping of vegToppings">
+        <td>{{ topping.name }} (${{ topping.price }})</td>
+        <td *ngFor="let size of sizes">
+          <input
+            type="checkbox"
+            (change)="onToppingSelect(topping, size)"
+            [attr.aria-label]="'Select ' + topping.name + ' for ' + size.label"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td colspan="5"><strong>Non-Veg Toppings</strong></td>
+      </tr>
+      <tr *ngFor="let topping of nonVegToppings">
+        <td>{{ topping.name }} (${{ topping.price }})</td>
+        <td *ngFor="let size of sizes">
+          <input
+            type="checkbox"
+            (change)="onToppingSelect(topping, size)"
+            [attr.aria-label]="'Select ' + topping.name + ' for ' + size.label"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td colspan="5"><strong>Total</strong></td>
+      </tr>
+      <tr>
+        <td>Offer</td>
+        <td *ngFor="let pizza of pizzas">
+          {{ pizza.offerName }}
+        </td>
+      </tr>
+      <tr>
+        <td>After discount</td>
+        <td *ngFor="let pizza of pizzas">
+          <div>
+            <span
+              *ngIf="pizza.isSelected && pizza.offerName"
+              style="text-decoration: line-through"
+            >
+              {{ pizza.beforeDiscount ? "$" + pizza.beforeDiscount : "" }}
+            </span>
+            <br />
+            <span *ngIf="pizza.isSelected">
+              {{ pizza.afterDiscount ? "$" + pizza.afterDiscount : "" }}
+            </span>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="summary">
+    <h3>Order Summary</h3>
+    <p>Total: ${{ totalPrice }}</p>
+    <button (click)="submitOrder()">Submit Order</button>
+  </div>
+</div>
